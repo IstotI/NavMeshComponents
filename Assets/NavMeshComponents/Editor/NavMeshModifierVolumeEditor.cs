@@ -102,13 +102,12 @@ namespace UnityEditor.AI
         void InspectorEditButtonGUI()
         {
             var navModifier = (NavMeshModifierVolume)target;
-            var bounds = new Bounds(navModifier.transform.position, navModifier.size);
 
             EditMode.DoEditModeInspectorModeButton(
                 EditMode.SceneViewEditMode.Collider,
                 "Edit Volume",
                 EditorGUIUtility.IconContent("EditCollider"),
-                bounds,
+				delegate {return new Bounds(navModifier.transform.position, navModifier.size);},
                 this
                 );
         }

@@ -437,13 +437,12 @@ namespace UnityEditor.AI
         void InspectorEditButtonGUI()
         {
             var navSurface = (NavMeshSurface)target;
-            var bounds = new Bounds(navSurface.transform.position, navSurface.size);
 
             EditMode.DoEditModeInspectorModeButton(
                 EditMode.SceneViewEditMode.Collider,
                 "Edit Volume",
                 EditorGUIUtility.IconContent("EditCollider"),
-                bounds,
+				delegate {return new Bounds(navSurface.transform.position, navSurface.size);},
                 this
                 );
         }
