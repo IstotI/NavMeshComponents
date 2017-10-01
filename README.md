@@ -1,5 +1,3 @@
-⚠️ This branch might require features only available starting with **Unity 2017.2**.
-
 # Components for Runtime NavMesh Building
 
 Here we introduce four components for the navigation system:
