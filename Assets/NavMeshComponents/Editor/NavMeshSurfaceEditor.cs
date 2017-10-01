@@ -382,6 +382,8 @@ namespace UnityEditor.AI
         static void RenderBoxGizmoSelected(NavMeshSurface navSurface, GizmoType gizmoType)
         {
             RenderBoxGizmo(navSurface, gizmoType, true);
+
+            navSurface.DrawGizmo();
         }
 
         [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Pickable)]
