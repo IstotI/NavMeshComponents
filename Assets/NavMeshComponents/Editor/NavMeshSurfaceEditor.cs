@@ -135,6 +135,12 @@ namespace UnityEditor.AI
             }
         }
 
+        Bounds GetBounds()
+        {
+            var navSurface = (NavMeshSurface)target;
+            return new Bounds(navSurface.transform.position, navSurface.size);
+        }
+
         public override void OnInspectorGUI()
         {
             if (s_Styles == null)
@@ -159,9 +165,13 @@ namespace UnityEditor.AI
             if ((CollectObjects)m_CollectObjects.enumValueIndex == CollectObjects.Volume)
             {
                 EditorGUI.indentLevel++;
-                InspectorEditButtonGUI();
+
+                EditMode.DoEditModeInspectorModeButton(EditMode.SceneViewEditMode.Collider, "Edit Volume",
+                    EditorGUIUtility.IconContent("EditCollider"), GetBounds, this);
                 EditorGUILayout.PropertyField(m_Size);
                 EditorGUILayout.PropertyField(m_Center);
+
+                EditorGUI.indentLevel--;
             }
             else
             {
@@ -432,19 +442,6 @@ namespace UnityEditor.AI
             Gizmos.color = oldColor;
 
             Gizmos.DrawIcon(navSurface.transform.position, "NavMeshSurface Icon", true);
-        }
-
-        void InspectorEditButtonGUI()
-        {
-            var navSurface = (NavMeshSurface)target;
-
-            EditMode.DoEditModeInspectorModeButton(
-                EditMode.SceneViewEditMode.Collider,
-                "Edit Volume",
-                EditorGUIUtility.IconContent("EditCollider"),
-				delegate {return new Bounds(navSurface.transform.position, navSurface.size);},
-                this
-                );
         }
 
         void OnSceneGUI()
